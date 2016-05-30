@@ -7,10 +7,10 @@ public class TransactionTest {
 		return create(Long.valueOf(i), parent, null == parent ? "type" : parent.getType(), Math.random()*1000);
 	}
 
-	public static Transaction create(final Long id, final Transaction parant, final String type, final Double amount){
+	public static Transaction create(final Long id, final Transaction parent, final String type, final Double amount){
 		Transaction t = new Transaction();
 		t.setId(id);
-		t.setParent(parant);
+		t.setParent(parent);
 		t.setType(type);
 		t.setAmount(amount);
 		return t;
