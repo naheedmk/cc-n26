@@ -10,9 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TransactionDTO {
 
-	@XmlElement
-	private Long id;
-
 	@NotNull
 	@XmlElement
 	private Double amount;
@@ -21,16 +18,8 @@ public class TransactionDTO {
 	@XmlElement
 	private String type;
 
-	@XmlElement
+	@XmlElement(nillable = true)
 	private Long parentId;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(final Long id) {
-		this.id = id;
-	}
 
 	public Double getAmount() {
 		return amount;
@@ -54,6 +43,43 @@ public class TransactionDTO {
 
 	public void setParentId(final Long parentId) {
 		this.parentId = parentId;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result + ((parentId == null) ? 0 : parentId.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TransactionDTO other = (TransactionDTO) obj;
+		if (amount == null) {
+			if (other.amount != null)
+				return false;
+		} else if (!amount.equals(other.amount))
+			return false;
+		if (parentId == null) {
+			if (other.parentId != null)
+				return false;
+		} else if (!parentId.equals(other.parentId))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
 	}
 
 }

@@ -1,16 +1,23 @@
 package com.n26.cc.server.services;
 
+import com.n26.cc.server.core.exceptions.ServiceException;
 import com.n26.cc.server.models.TransactionDTO;
 import com.n26.cc.server.models.TransactionSummingDTO;
 
+import java.util.Collection;
+
 public interface TransactionService {
 
-	TransactionDTO get(Long tid);
+	ServiceResponse<Collection<TransactionDTO>> getAll();
+	
+	ServiceResponse<TransactionDTO> get(Long tid);
 
-	long[] getByType(String type);
+	ServiceResponse<long[]> getByType(String type);
 
-	TransactionSummingDTO getSum(Long tid);
+	ServiceResponse<TransactionSummingDTO> getSum(Long tid);
 
-	TransactionDTO update(TransactionDTO transaction);
+	ServiceResponse<TransactionDTO> post(Long id, TransactionDTO transaction) throws ServiceException;
 
+	ServiceResponse<TransactionDTO> put(Long id, TransactionDTO transaction) throws ServiceException;
+	
 }

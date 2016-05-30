@@ -2,26 +2,41 @@ package com.n26.cc.server.repositories;
 
 import com.n26.cc.server.models.Transaction;
 
+import javax.ws.rs.WebApplicationException;
+
 import java.util.Collection;
 import java.util.Optional;
 
 public interface TransactionRepository {
 
+
+	Optional<Transaction> get(Long id);
+
 	/**
-	 * @param tid the <code>transaction_id</code> to look for
-	 * @return 
+	 * @return
+	 */
+	Collection<Transaction> getAll();
+		
+	/**
+	 * @param type
+	 * @return
 	 * @throws NullPointerException if given parameter was <code>null</code>
 	 */
-	Optional<Transaction> get(Long tid) throws NullPointerException;
+	Collection<Transaction> getByType(String type);
 
-	Collection<Transaction> getAll();
+	/**
+	 * @param entity
+	 * @return
+	 * @throws NullPointerException if given parameter was <code>null</code>
+	 * @throws WebApplicationException with status Conflict if resource already exists
+	 */
+	Transaction post(Transaction entity);
+
+	/**
+	 * @param entity
+	 * @return
+	 * @throws NullPointerException if given parameter was <code>null</code>
+	 */
+	Transaction put(Transaction entity);
 	
-	Collection<Transaction> getAll(Long tid) throws NullPointerException;
-	
-	Collection<Transaction> getByType(String type) throws NullPointerException;
-
-	Transaction update(Transaction entity);
-
-	
-
 }
